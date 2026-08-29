@@ -1,34 +1,11 @@
 let courses = [];
 let selectedCourse;
 const list = document.querySelector('#course-list');
-
-function rating(label, value) { return `<span class="rating">${label} <strong>${value}/10</strong></span>`; }
-
-function altitudeProfile(course) {
-  const base = course.baseElevationM || 20;
-  const gain = Math.round(course.distanceKm * course.incline * 1.7);
-  const points = Array.from({ length: 10 }, (_, i) => Math.round(base + (gain * i / 9) + Math.sin(i * 1.7 + course.difficulty) * (course.incline * 1.8)));
-  points[0] = base; points[points.length - 1] = Math.round(base + gain * .72);
-  return { points, gain, high: Math.max(...points) };
-}
-
-function renderElevation(course) {
-  const profile = altitudeProfile(course);
-  const min = Math.min(...profile.points) - 5;
-  const max = Math.max(...profile.points) + 5;
-  const coords = profile.points.map((value, index) => `${index * 55 + 5},${138 - ((value - min) / (max - min)) * 112}`).join(' ');
-  document.querySelector('#elevation-name').textContent = course.name;
-  document.querySelector('#elevation-gain').textContent = `+${profile.gain} m gain`;
-  document.querySelector('#elevation-high').textContent = `${profile.high} m high`;
-  document.querySelector('#elevation-chart').innerHTML = `<defs><linearGradient id="elevation-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4f36a" stop-opacity=".65"/><stop offset="1" stop-color="#d4f36a" stop-opacity="0"/></linearGradient></defs><polyline points="${coords} 500,145 5,145" class="elevation-fill"/><polyline points="${coords}" class="elevation-line"/>${profile.points.map((value,index) => `<circle cx="${index * 55 + 5}" cy="${138 - ((value - min) / (max - min)) * 112}" r="3" class="elevation-point"><title>${value}m</title></circle>`).join('')}`;
-}
-
-function renderCourses() {
-  list.innerHTML = courses.map((course) => `<article class="course-card ${course.id === selectedCourse.id ? 'selected' : ''}" data-course="${course.id}" tabindex="0"><div class="course-top"><div><div class="course-name">${course.name}</div><div class="course-area">${course.area} · ${course.terrain}</div></div><strong>${course.distanceKm} km</strong></div><div class="course-meta">${rating('DIFFICULTY', course.difficulty)} ${rating('INCLINE', course.incline)}</div></article>`).join('');
-  document.querySelector('#course-count').textContent = String(courses.length).padStart(2, '0');
-  document.querySelectorAll('.course-card').forEach((card) => { const choose = () => { selectedCourse = courses.find((course) => course.id === card.dataset.course); renderCourses(); renderElevation(selectedCourse); }; card.addEventListener('click', choose); card.addEventListener('keydown', (event) => { if (event.key === 'Enter') choose(); }); });
-}
-
-document.querySelector('#invite-button').addEventListener('click', () => { const input = document.querySelector('#invite-input'); const status = document.querySelector('#invite-status'); if (!input.value || !input.value.includes('@')) { status.textContent = 'Enter a valid email to send an invite.'; return; } status.textContent = `Invite ready for ${input.value} — ${selectedCourse.name} selected.`; input.value = ''; });
-
-fetch('../data/courses.json').then((response) => response.json()).then((data) => { courses = data; selectedCourse = courses[0]; renderCourses(); renderElevation(selectedCourse); }).catch(() => { list.innerHTML = '<p class="load-error">Course data could not be loaded. Serve the repository over HTTP.</p>'; });
+const markers = document.querySelector('#course-markers');
+const overview = document.querySelector('#overview-mode');
+const detail = document.querySelector('#detail-mode');
+function profile(course){const base=course.baseElevationM||20;const gain=Math.round(course.distanceKm*course.incline*1.7);const points=Array.from({length:10},(_,i)=>Math.round(base+gain*i/9+Math.sin(i*1.7+course.difficulty)*course.incline*1.8));points[0]=base;points[9]=Math.round(base+gain*.72);return{points,gain,high:Math.max(...points)}}
+function renderElevation(course){const p=profile(course),min=Math.min(...p.points)-5,max=Math.max(...p.points)+5;const y=v=>138-(v-min)/(max-min)*112;const coords=p.points.map((v,i)=>`${i*55+5},${y(v)}`).join(' ');document.querySelector('#elevation-gain').textContent=`+${p.gain} m gain`;document.querySelector('#elevation-high').textContent=`${p.high} m high`;document.querySelector('#elevation-chart').innerHTML=`<defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4f36a" stop-opacity=".7"/><stop offset="1" stop-color="#d4f36a" stop-opacity="0"/></linearGradient></defs><polyline points="${coords} 500,145 5,145" class="elevation-fill"/><polyline points="${coords}" class="elevation-line"/>${p.points.map((v,i)=>`<circle cx="${i*55+5}" cy="${y(v)}" r="3" class="elevation-point"><title>${v}m</title></circle>`).join('')}`}
+function openCourse(course){selectedCourse=course;document.querySelector('#detail-name').textContent=course.name;document.querySelector('#detail-title').textContent=course.name;document.querySelector('#detail-area').textContent=course.area;document.querySelector('#detail-terrain').textContent=course.terrain;const p=profile(course);document.querySelector('#detail-stats').innerHTML=`<div><span>DISTANCE</span><strong>${course.distanceKm} km</strong></div><div><span>DIFFICULTY</span><strong>${course.difficulty}<small>/10</small></strong></div><div><span>INCLINE</span><strong>${course.incline}<small>/10</small></strong></div><div><span>ELEVATION GAIN</span><strong>+${p.gain}<small> m</small></strong></div>`;renderElevation(course);overview.classList.remove('active');detail.classList.add('active');document.querySelectorAll('.mode-button').forEach(b=>b.classList.toggle('active',b.dataset.mode==='detail'));window.scrollTo({top:0,behavior:'smooth'})}
+function render(){list.innerHTML=courses.map(c=>`<article class="course-card" data-id="${c.id}"><div class="course-top"><div><div class="course-name">${c.name}</div><div class="course-area">${c.area}</div></div><strong>${c.distanceKm} km</strong></div><div class="course-meta"><span>DIFFICULTY <b>${c.difficulty}/10</b></span><span>INCLINE <b>${c.incline}/10</b></span></div></article>`).join('');document.querySelector('#course-count').textContent=String(courses.length).padStart(2,'0');document.querySelectorAll('.course-card').forEach(el=>el.addEventListener('click',()=>openCourse(courses.find(c=>c.id===el.dataset.id))));markers.innerHTML=courses.map((c,i)=>`<button class="marker marker-${i+1}" title="${c.name}" aria-label="Open ${c.name}" data-id="${c.id}">${i+1}</button>`).join('');document.querySelectorAll('.course-markers .marker').forEach(el=>el.addEventListener('click',()=>openCourse(courses.find(c=>c.id===el.dataset.id))))}
+document.querySelector('#back-button').addEventListener('click',()=>{detail.classList.remove('active');overview.classList.add('active');document.querySelectorAll('.mode-button').forEach(b=>b.classList.toggle('active',b.dataset.mode==='overview'))});document.querySelectorAll('.mode-button').forEach(b=>b.addEventListener('click',()=>b.dataset.mode==='detail'&&selectedCourse?openCourse(selectedCourse):document.querySelector('#back-button').click()));document.querySelector('#detail-invite').addEventListener('click',()=>{document.querySelector('#detail-cta').textContent='Crew invite ready!';});fetch('../data/courses.json').then(r=>r.json()).then(data=>{courses=data;render()}).catch(()=>{list.innerHTML='<p class="load-error">Serve the repository over HTTP to load course data.</p>'});
