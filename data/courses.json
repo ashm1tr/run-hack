@@ -1,0 +1,32 @@
+[
+  {
+    "id": "regents-park-loop",
+    "name": "Regent's Park Loop",
+    "area": "Regent's Park",
+    "distanceKm": 5.2,
+    "difficulty": 4,
+    "incline": 3,
+    "terrain": "Park paths",
+    "accent": "#7dd3fc"
+  },
+  {
+    "id": "primrose-hill-climb",
+    "name": "Primrose Hill Climb",
+    "area": "Camden",
+    "distanceKm": 6.8,
+    "difficulty": 7,
+    "incline": 8,
+    "terrain": "Mixed streets",
+    "accent": "#fbbf24"
+  },
+  {
+    "id": "thames-sprint",
+    "name": "Thames Riverside Sprint",
+    "area": "South Bank",
+    "distanceKm": 10.0,
+    "difficulty": 6,
+    "incline": 2,
+    "terrain": "Riverside path",
+    "accent": "#fb7185"
+  }
+]
