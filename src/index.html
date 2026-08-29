@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>London Run League</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <p class="eyebrow">RUN HACK // LONDON</p>
+        <h1>Choose your route.<br /><span>Beat your crew.</span></h1>
+        <p class="intro">Race across the city, master every incline, and build your team leaderboard.</p>
+      </section>
+
+      <section class="game-grid">
+        <div class="map-panel" aria-label="Illustrated London race map">
+          <div class="map-label label-west">HYDE PARK</div>
+          <div class="map-label label-north">CAMDEN</div>
+          <div class="map-label label-east">CITY</div>
+          <div class="map-label label-south">SOUTH BANK</div>
+          <svg class="route-lines" viewBox="0 0 600 500" role="img" aria-label="Sample race routes">
+            <path d="M75 375 C150 305 120 175 245 185 S350 330 520 150" class="route route-one" />
+            <path d="M160 80 C260 145 225 230 340 280 S445 420 500 410" class="route route-two" />
+            <circle cx="75" cy="375" r="9" class="route-pin" /><circle cx="520" cy="150" r="9" class="route-pin" />
+          </svg>
+          <div class="map-status"><span class="pulse"></span> 3 live courses nearby</div>
+        </div>
+
+        <aside class="course-panel">
+          <div class="panel-heading"><div><p class="eyebrow">TODAY'S COURSES</p><h2>Pick a challenge</h2></div><span class="course-count">03</span></div>
+          <div id="course-list" class="course-list"></div>
+          <div class="invite-box">
+            <p class="eyebrow">TEAM UP</p>
+            <h3>Bring your people</h3>
+            <p>Invite a team lead or friend to race this course.</p>
+            <div class="invite-row"><input id="invite-input" type="email" placeholder="friend@email.com" aria-label="Friend email" /><button id="invite-button">Invite</button></div>
+            <p id="invite-status" class="invite-status" role="status"></p>
+          </div>
+        </aside>
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
