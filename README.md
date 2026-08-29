@@ -20,7 +20,7 @@ A map-based running game for the hackathon. Explore London, pick a race course, 
 
 ### Running locally
 
-This starter is dependency-free. Open `src/index.html` in a browser, or serve the repository with any static file server.
+Serve the repository with any static file server (course data is fetched, so `file://` won't work), e.g. `python3 -m http.server 8000`, then open `http://localhost:8000/src/index.html`. Map tiles and MapLibre load from CDNs when online; the app degrades gracefully offline.
 
 ### Next steps
 
