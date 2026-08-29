@@ -10,23 +10,93 @@
     "accent": "#7dd3fc"
   },
   {
+    "id": "hyde-park-loop",
+    "name": "Hyde Park Serpentine Loop",
+    "area": "Hyde Park",
+    "distanceKm": 6.4,
+    "difficulty": 3,
+    "incline": 2,
+    "terrain": "Park paths",
+    "accent": "#86efac"
+  },
+  {
+    "id": "richmond-park-tamsin",
+    "name": "Richmond Park Tamsin Trail",
+    "area": "Richmond Park",
+    "distanceKm": 11.7,
+    "difficulty": 7,
+    "incline": 7,
+    "terrain": "Trail and park roads",
+    "accent": "#fbbf24"
+  },
+  {
     "id": "primrose-hill-climb",
     "name": "Primrose Hill Climb",
-    "area": "Camden",
+    "area": "Camden and Primrose Hill",
     "distanceKm": 6.8,
     "difficulty": 7,
     "incline": 8,
     "terrain": "Mixed streets",
-    "accent": "#fbbf24"
+    "accent": "#fb7185"
   },
   {
-    "id": "thames-sprint",
+    "id": "hampstead-heath-loop",
+    "name": "Hampstead Heath Ridge Run",
+    "area": "Hampstead Heath",
+    "distanceKm": 8.0,
+    "difficulty": 8,
+    "incline": 9,
+    "terrain": "Hilly trails",
+    "accent": "#c084fc"
+  },
+  {
+    "id": "thames-riverside-sprint",
     "name": "Thames Riverside Sprint",
-    "area": "South Bank",
+    "area": "South Bank to Tower Bridge",
     "distanceKm": 10.0,
     "difficulty": 6,
     "incline": 2,
     "terrain": "Riverside path",
-    "accent": "#fb7185"
+    "accent": "#fda4af"
+  },
+  {
+    "id": "victoria-park-loop",
+    "name": "Victoria Park Grand Loop",
+    "area": "Victoria Park",
+    "distanceKm": 4.5,
+    "difficulty": 3,
+    "incline": 1,
+    "terrain": "Park paths",
+    "accent": "#67e8f9"
+  },
+  {
+    "id": "wimbledon-common-trail",
+    "name": "Wimbledon Common Trail",
+    "area": "Wimbledon",
+    "distanceKm": 8.2,
+    "difficulty": 6,
+    "incline": 6,
+    "terrain": "Woodland and heath",
+    "accent": "#bef264"
+  },
+  {
+    "id": "epping-forest-trail",
+    "name": "Epping Forest Greenway",
+    "area": "Epping Forest",
+    "distanceKm": 10.0,
+    "difficulty": 7,
+    "incline": 6,
+    "terrain": "Forest trails",
+    "accent": "#2dd4bf"
+  },
+  {
+    "id": "olympic-park-five",
+    "name": "Queen Elizabeth Olympic Park Five",
+    "area": "Stratford",
+    "distanceKm": 5.0,
+    "difficulty": 4,
+    "incline": 2,
+    "terrain": "Canal and park paths",
+    "accent": "#93c5fd"
   }
 ]
