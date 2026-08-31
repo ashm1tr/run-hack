@@ -1,30 +1,37 @@
-# run-hack
+# Polymarket for Running
 
-## London Run League
+## A hackathon project for RUN/HACK London by Ashmit, Ravjoth, and Mustafa
 
-A map-based running game for the hackathon. Explore London, pick a race course, and compete with friends on routes rated by difficulty and incline.
+Race real London courses with live GPS. Every kilometre you run mints your bankroll. Stake it on head-to-head markets about your friends — winners split the losers' pot.
 
-### Core loop
+## Core Functionalities
 
-1. Browse race courses across London on the map.
-2. Compare distance, difficulty, and incline ratings out of 10.
-3. Invite friends or a team lead to join a race.
-4. Complete the course and climb the leaderboard.
+### The Market
 
-### Starter structure
+- Join a group of your friends. We analyse your running trends and make odds on who is more likely to finish what course quickest and beat which of your other friends, accounting for course difficulty, previous running times and general fitness data
+E.g. Who will complete Regent's Park Loop quicker: Sam or Priya?
 
-- `src/index.html` — lightweight game UI shell
-- `src/styles.css` — map, course cards, and invite panel styling
-- `src/app.js` — sample course data, rendering, course selection, and invite flow
-- `data/courses.json` — seed course catalogue for London routes
+### The City Map
 
-### Running locally
+- See a bird's-eye view of London's race network. Initially with only 10 courses for the hackathon demo.
+- Search, filter, then drop into an immersive route preview, with stats tracking difficulty, incline, elevation, and distance
+- Invite friends or a team lead to join a race.
+- Complete the course and climb the leaderboard, boosting your odds of completing the course quicker
 
-Serve the repository with any static file server (course data is fetched, so `file://` won't work), e.g. `python3 -m http.server 8000`, then open `http://localhost:8000/src/index.html`. Map tiles and MapLibre load from CDNs when online; the app degrades gracefully offline.
+## Why
 
-### Next steps
+The initial idea for the hackathon was a way to gamify running, as you compete and gain certain points running at different elevations or difficult courses.
+We chose to pivot to a Prediction Market style game afterwards, namely Polymarket for Running, after realising the immense motivation behind these sorts of products.
+After all, seeing an algorithm say you have a 80% chance of running Regent's Park Loop slower than your friend Priya motivates you to train and run harder!!
 
-- Replace the illustrated map with Mapbox or Google Maps tiles.
-- Persist teams, invites, race progress, and leaderboards.
-- Add GPS tracking and route completion checks.
-- Import elevation data to calculate the incline rating automatically.
+## How we built it
+
+The hackathon dictated that we could only build hands-free, so we set-up Poke paired with Devin, a coding agent.
+While running, we voice dictated our prompts via Wispr Flow into messages, letting Poke and Devin hnadle the coding.
+In the meantime, we ran + planned ahead, testing the project at intervals and seeing what features we could incorporate next!
+
+Ultimately, it was an incredibly rewarding experience, and a very fun + enjoyable project :)
+
+## Notice
+
+This is a hackathon, not a fully fleshed out project.
